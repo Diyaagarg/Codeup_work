@@ -1,9 +1,9 @@
+
 /**
  * @Filename - MyString.java
  * @Description - This will perform all operations of string
  * @author - Diya Garg
  */
-
 
 import java.util.Arrays;
 
@@ -21,8 +21,8 @@ public class MyString {
         boolean isWord = false;
 
         for (int i = 0; i < str1.length(); i++) {
-            char ch = str1.charAt(i);
-            if (ch != ' ') {
+            char characters = str1.charAt(i);
+            if (characters != ' ') {
                 if (!isWord) {
                     wordCount++;
                     isWord = true;
@@ -75,16 +75,19 @@ public class MyString {
 
     // 6. Split
     public static String[] split(String str1) {
-        int n  = count(str1);
+        int n = count(str1);
         String[] arr = new String[n];
 
         int i = 0, index = 0;
         while (i < str1.length()) {
-            while (i < str1.length() && str1.charAt(i) == ' ') i++;
-            if (i >= str1.length()) break;
+            while (i < str1.length() && str1.charAt(i) == ' ')
+                i++;
+            if (i >= str1.length())
+                break;
 
             int j = i;
-            while (j < str1.length() && str1.charAt(j) != ' ') j++;
+            while (j < str1.length() && str1.charAt(j) != ' ')
+                j++;
 
             arr[index++] = str1.substring(i, j);
             i = j + 1;
@@ -121,7 +124,8 @@ public class MyString {
     public static String shift(String str, int n) {
         int len = str.length();
         n = n % len;
-        if (n < 0) n += len;
+        if (n < 0)
+            n += len;
         return str.substring(len - n) + str.substring(0, len - n);
     }
 
