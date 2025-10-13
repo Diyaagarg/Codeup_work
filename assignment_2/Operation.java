@@ -1,34 +1,36 @@
 /**
  * @filename - Operation.java
- * @description - This is the  file which contains the all functions
- * related to string and number operations.
+ * @description - This file contains all functions related to string and number operations.
  * @author - Diya Garg 
  */
 
 
-import java.util.*;
-
 public class Operation {
 
-    // 1. Count Unique Palindromes
-
+    // 1. Count Unique Palindromes (without HashSet/ArrayList)
     public static int countUniquePalindromes(String s) {
-        HashSet<String> set = new HashSet<>();
+        String unique = "";
+        int count = 0;
+
         for (int i = 0; i < s.length(); i++) {
-            
-            expandAroundCenter(s, i, i, set);
-        
-            expandAroundCenter(s, i, i + 1, set);
+            count += expandAndCount(s, i, i, unique);
+            count += expandAndCount(s, i, i + 1, unique);
         }
-        return set.size();
+        return count;
     }
 
-    private static void expandAroundCenter(String s, int left, int right, HashSet<String> set) {
+    private static int expandAndCount(String s, int left, int right, String unique) {
+        int localCount = 0;
         while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
-            set.add(s.substring(left, right + 1));
+            String sub = s.substring(left, right + 1);
+            if (!unique.contains(sub + ",")) {
+                unique += sub + ",";
+                localCount++;
+            }
             left--;
             right++;
         }
+        return localCount;
     }
 
     // 2. Fibonacci Sequence – Nth Number
@@ -66,9 +68,20 @@ public class Operation {
         return count;
     }
 
-    // 5. Binary to Decimal Conversion
+    // 5. Binary to Decimal Conversion (manual method)
     public static int binaryToDecimal(String binary) {
-        return Integer.parseInt(binary, 2);
+        int decimal = 0;
+        int power = 0;
+        for (int i = binary.length() - 1; i >= 0; i--) {
+            char ch = binary.charAt(i);
+            if (ch == '1') {
+                decimal += Math.pow(2, power);
+            } else if (ch != '0') {
+                throw new IllegalArgumentException("Invalid binary input");
+            }
+            power++;
+        }
+        return decimal;
     }
 
     // 6. Characters in a String (Expanding Characters)
@@ -84,17 +97,26 @@ public class Operation {
         return result.toString();
     }
 
-    // 7. Character Frequency in a String
+    // 7. Character Frequency in a String (beginner version without Map)
     public static String charFrequency(String str) {
-        StringBuilder result = new StringBuilder();
-        LinkedHashMap<Character, Integer> map = new LinkedHashMap<>();
-        for (char c : str.toCharArray()) {
-            map.put(c, map.getOrDefault(c, 0) + 1);
+        str = str.toLowerCase();
+        String result = "";
+        boolean[] counted = new boolean[str.length()];
+
+        for (int i = 0; i < str.length(); i++) {
+            if (counted[i]) continue;
+            char ch = str.charAt(i);
+            int count = 1;
+
+            for (int j = i + 1; j < str.length(); j++) {
+                if (str.charAt(j) == ch) {
+                    count++;
+                    counted[j] = true;
+                }
+            }
+            result += ch + "" + count;
         }
-        for (Map.Entry<Character, Integer> entry : map.entrySet()) {
-            result.append(entry.getKey()).append(entry.getValue());
-        }
-        return result.toString();
+        return result;
     }
 
     // 8. Prime Number Checker
@@ -132,16 +154,20 @@ public class Operation {
             return String.valueOf(num);
     }
 
-    // 10. Longest Substring Without Repeating Characters
+    // 10. Longest Substring Without Repeating Characters (without HashSet/ArrayList)
     public static int lengthOfLongestSubstring(String s) {
-        HashSet<Character> set = new HashSet<>();
-        int left = 0, maxLen = 0;
-        for (int right = 0; right < s.length(); right++) {
-            while (set.contains(s.charAt(right))) {
-                set.remove(s.charAt(left++));
+        int maxLen = 0;
+        for (int i = 0; i < s.length(); i++) {
+            String sub = "";
+            for (int j = i; j < s.length(); j++) {
+                if (sub.contains(s.charAt(j) + "")) {
+                    break;
+                }
+                sub += s.charAt(j);
             }
-            set.add(s.charAt(right));
-            maxLen = Math.max(maxLen, right - left + 1);
+            if (sub.length() > maxLen) {
+                maxLen = sub.length();
+            }
         }
         return maxLen;
     }
