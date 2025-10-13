@@ -7,7 +7,7 @@
 
 public class Operation {
 
-    // 1. Count Unique Palindromes (without HashSet/ArrayList)
+    // 1. Count Unique Palindromes
     public static int countUniquePalindromes(String s) {
         String unique = "";
         int count = 0;
@@ -68,7 +68,7 @@ public class Operation {
         return count;
     }
 
-    // 5. Binary to Decimal Conversion (manual method)
+    // 5. Binary to Decimal Conversion 
     public static int binaryToDecimal(String binary) {
         int decimal = 0;
         int power = 0;
@@ -84,7 +84,7 @@ public class Operation {
         return decimal;
     }
 
-    // 6. Characters in a String (Expanding Characters)
+    // 6. Characters in a String 
     public static String expandCharacters(String str) {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < str.length() - 1; i += 2) {
@@ -97,7 +97,7 @@ public class Operation {
         return result.toString();
     }
 
-    // 7. Character Frequency in a String (beginner version without Map)
+    // 7. Character Frequency in a String 
     public static String charFrequency(String str) {
         str = str.toLowerCase();
         String result = "";
@@ -154,7 +154,7 @@ public class Operation {
             return String.valueOf(num);
     }
 
-    // 10. Longest Substring Without Repeating Characters (without HashSet/ArrayList)
+    // 10. Longest Substring Without Repeating Characters 
     public static int lengthOfLongestSubstring(String s) {
         int maxLen = 0;
         for (int i = 0; i < s.length(); i++) {
