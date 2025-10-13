@@ -1,7 +1,7 @@
 /**
- * @filename - Main.java
+ * @filename - MainOperation.java
  * @description - This is the main file which contains the main function 
- * and a menu to call different functions of the MyOperation class.
+ * and a menu to call different functions of the Operation class.
  * @author - Diya Garg 
  */
 
@@ -27,11 +27,10 @@ public class MainOperation {
             System.out.println("11. Exit");
             System.out.print("Enter your choice: ");
 
-            // ✅ Validate that input is an integer
             if (!sc.hasNextInt()) {
                 System.out.println("Invalid choice! Please enter a valid number between 1 and 11.");
-                sc.nextLine(); // clear invalid input
-                continue;      // restart loop
+                sc.nextLine();
+                continue;
             }
 
             choice = sc.nextInt();
